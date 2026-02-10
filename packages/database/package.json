@@ -7,13 +7,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "ts-node src/migrate.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "worker:webhook": "ts-node src/worker/webhook-worker.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.23.0",
   "dependencies": {
+    "axios": "^1.13.5",
     "dotenv": "^17.2.4",
     "pg": "^8.18.0"
   },

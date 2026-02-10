@@ -8,3 +8,4 @@ export * from "./ports/event-bus";
 export * from "./use-cases/create-payment-intent";
 export * from "./use-cases/confirm-payment-intent";
 export * from "./use-cases/authorize-payment-intent";
+export * from "./use-cases/fail-payment-intent";

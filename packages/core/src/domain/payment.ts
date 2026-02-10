@@ -26,6 +26,9 @@ export class Payment {
 
       case "PROCESSING":
         return ["SUCCEEDED", "FAILED"];
+        
+      case "FAILED":
+        return ["REQUIRES_ACTION"];
 
       case "SUCCEEDED":
         return ["REFUNDED"];
