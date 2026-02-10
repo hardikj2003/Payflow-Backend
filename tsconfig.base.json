@@ -9,8 +9,10 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@core/*": ["packages/core/*"],
-      "@db/*": ["packages/database/*"],
+      "@core": ["packages/core/dist"],
+      "@core/*": ["packages/core/dist/*"],
+      "@db": ["packages/database/dist"],
+      "@db/*": ["packages/database/dist/*"],
       "@shared/*": ["packages/shared/*"]
     }
   }
