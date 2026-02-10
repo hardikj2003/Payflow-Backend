@@ -1,5 +1,7 @@
 import express from "express";
 import { CreatePaymentIntent } from "@core";
+import { ConfirmPaymentIntent } from "@core";
+import { AuthorizePaymentIntent } from "@core";
 import { PostgresPaymentRepository } from "@db";
 import { PostgresEventBus } from "@db";
 
@@ -10,6 +12,8 @@ app.use(express.json());
 const payments = new PostgresPaymentRepository();
 const events = new PostgresEventBus();
 const createPaymentIntent = new CreatePaymentIntent(payments, events);
+const confirmPayment = new ConfirmPaymentIntent(payments);
+const authorizePayment = new AuthorizePaymentIntent(payments);
 
 app.post("/payment-intents", async (req, res) => {
   try {
@@ -24,6 +28,24 @@ app.post("/payment-intents", async (req, res) => {
       idempotencyKey: idempotencyKey
     });
 
+    res.json(result);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.post("/payment-intents/:id/confirm", async (req, res) => {
+  try {
+    const result = await confirmPayment.execute(req.params.id);
+    res.json(result);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.post("/payment-intents/:id/authorize", async (req, res) => {
+  try {
+    const result = await authorizePayment.execute(req.params.id);
     res.json(result);
   } catch (err: any) {
     res.status(400).json({ error: err.message });

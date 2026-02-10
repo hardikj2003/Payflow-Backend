@@ -8,6 +8,8 @@ export interface PaymentIntentRecord {
 }
 
 export interface PaymentRepository {
+
+  // create intent (idempotent)
   createPaymentIntent(data: {
     merchantId: string;
     amount: number;
@@ -15,4 +17,13 @@ export interface PaymentRepository {
     description?: string;
     idempotencyKey?: string;
   }): Promise<PaymentIntentRecord>;
+
+  // load existing intent
+  getPaymentIntent(id: string): Promise<PaymentIntentRecord | null>;
+
+  // persist validated status
+  updatePaymentIntentStatus(id: string, status: string): Promise<void>;
+
+  // create financial record
+  createPaymentRecord(intent: PaymentIntentRecord): Promise<void>;
 }
