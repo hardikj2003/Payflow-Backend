@@ -1,0 +1,3 @@
+ALTER TABLE webhook_deliveries
+ADD COLUMN IF NOT EXISTS next_retry_at TIMESTAMP,
+ADD COLUMN IF NOT EXISTS max_attempts INT DEFAULT 6;

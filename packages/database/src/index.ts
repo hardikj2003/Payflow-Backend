@@ -3,3 +3,6 @@ export * from "./query";
 export * from "./transaction";
 export * from "./event-bus";
 export * from "./repositories/payment-repository";
+export * from "./repositories/payment-repository";
+export * from "./repositories/event-repository";
+export * from "./repositories/api-key-repository";
