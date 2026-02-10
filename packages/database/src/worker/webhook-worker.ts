@@ -55,7 +55,8 @@ async function processEvents() {
       );
 
       console.log("Delivered", job.id);
-    } catch {
+    } catch (err: any) {
+      console.log("Delivery error:", err.message);
       if (attempt >= job.max_attempts) {
         console.log("Permanent failure", job.id);
         continue;

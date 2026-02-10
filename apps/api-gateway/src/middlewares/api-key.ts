@@ -20,6 +20,7 @@ export async function apiKeyAuth(
   if (!merchantId) return res.status(401).json({ error: "Invalid API key" });
 
   (req as any).merchantId = merchantId;
+  (req as any).apiKeyPrefix = token.slice(0,12);
 
   next();
 }

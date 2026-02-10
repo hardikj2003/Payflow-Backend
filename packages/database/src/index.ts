@@ -6,3 +6,5 @@ export * from "./repositories/payment-repository";
 export * from "./repositories/payment-repository";
 export * from "./repositories/event-repository";
 export * from "./repositories/api-key-repository";
+export * from "./repositories/audit-repository";
+export * from "./repositories/analytics-repository"
