@@ -10,6 +10,7 @@ import { apiKeyAuth } from "./middlewares/api-key"; // pf_test_ff7c8c1aca5db3339
 import { rateLimit } from "./middlewares/rate-limit";
 import { auditAction } from "./middlewares/audit";
 import { PostgresAnalyticsRepository } from "@db";
+import { cacheOrCompute } from "./lib/cache";
 
 const app = express();
 app.use(express.json());
@@ -134,17 +135,38 @@ app.get(
 );
 
 app.get("/analytics/summary", apiKeyAuth, async (req,res)=>{
-  const data = await analytics.getSummary((req as any).merchantId);
+  const merchantId = (req as any).merchantId;
+
+  const data = await cacheOrCompute(
+    `summary:${merchantId}`,
+    30, // seconds
+    () => analytics.getSummary(merchantId)
+  );
+
   res.json(data);
 });
 
 app.get("/analytics/daily-revenue", apiKeyAuth, async (req,res)=>{
-  const data = await analytics.getDailyRevenue((req as any).merchantId);
+  const merchantId = (req as any).merchantId;
+
+  const data = await cacheOrCompute(
+    `daily:${merchantId}`,
+    60,
+    () => analytics.getDailyRevenue(merchantId)
+  );
+
   res.json(data);
 });
 
 app.get("/analytics/success-rate", apiKeyAuth, async (req,res)=>{
-  const data = await analytics.getSuccessRate((req as any).merchantId);
+  const merchantId = (req as any).merchantId;
+
+  const data = await cacheOrCompute(
+    `rate:${merchantId}`,
+    30,
+    () => analytics.getSuccessRate(merchantId)
+  );
+
   res.json(data);
 });
 

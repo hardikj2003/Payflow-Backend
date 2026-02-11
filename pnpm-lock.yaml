@@ -83,6 +83,19 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/infrastructure:
+    dependencies:
+      ioredis:
+        specifier: ^5.9.2
+        version: 5.9.2
+    devDependencies:
+      '@types/node':
+        specifier: ^25.2.2
+        version: 25.2.2
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
 packages:
 
   '@cspotcode/source-map-support@0.8.1':

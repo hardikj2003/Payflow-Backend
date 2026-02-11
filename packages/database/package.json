@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "ts-node src/migrate.ts",
     "build": "tsc",
-    "worker:webhook": "ts-node src/worker/webhook-worker.ts"
+    "worker:webhook": "ts-node src/worker/webhook-worker.ts",
+    "worker:cache": "ts-node src/worker/cache-worker.ts"
   },
   "keywords": [],
   "author": "",
